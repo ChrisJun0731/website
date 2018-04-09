@@ -1,4 +1,4 @@
-package mongo.entity.cases;
+package mongo.entity.news;
 
 import mongo.entity.Content;
 import org.bson.types.ObjectId;
@@ -10,7 +10,7 @@ import java.io.Serializable;
 /**
  * Created by Administrator on 2018/3/29.
  */
-@Document(collection = "house_case")
-public class HouseCase extends Case implements Serializable{
+@Document(collection="company_news")
+public class CompanyNews extends News implements Serializable{
 
 }

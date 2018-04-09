@@ -16,12 +16,27 @@
        http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
        http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 
-	<context:component-scan base-package="com.zhhf.website.controllers"/>
+	<context:component-scan base-package="controllers"/>
 
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/"/>
+	<!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+		<!--<property name="prefix" value="/WEB-INF/"/>-->
+		<!--<property name="suffix" value=".jsp"/>-->
+		<!--<property name="order" value="#{T(org.springframework.core.Ordered).LOWEST_PRECEDENCE}"/>-->
+	<!--</bean>-->
+
+	<bean id="templateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+		<property name="prefix" value="/WEB-INF/templates/"/>
 		<property name="suffix" value=".html"/>
-		<property name="contentType" value="text/html"/>
+		<property name="templateMode" value="LEGACYHTML5"/>
+		<!--<property name="order" value="#{T(org.springframework.core.Ordered).HIGHEST_PRECEDENCE}"/>-->
+	</bean>
+
+	<bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
+		<property name="templateResolver" ref="templateResolver"/>
+	</bean>
+
+	<bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+		<property name="templateEngine" ref="templateEngine"/>
 	</bean>
 
 	<mvc:annotation-driven/>

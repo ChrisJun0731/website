@@ -1,22 +1,18 @@
-package mongo.entity.news;
+package mongo.entity.cases;
 
 import mongo.entity.Content;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.io.Serializable;
 
 /**
- * Created by Administrator on 2018/3/29.
+ * Created by Administrator on 2018/3/31.
  */
-@Document(collection="trends")
-public class Trends implements Serializable{
+public class Case {
 
 	@Id
 	private ObjectId id;
 	private String title;
-	private String date;
+	private String coverPath;
 	private Content content;
 
 	public ObjectId getId() {
@@ -35,12 +31,12 @@ public class Trends implements Serializable{
 		this.title = title;
 	}
 
-	public String getDate() {
-		return date;
+	public String getCoverPath() {
+		return coverPath;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+	public void setCoverPath(String coverPath) {
+		this.coverPath = coverPath;
 	}
 
 	public Content getContent() {

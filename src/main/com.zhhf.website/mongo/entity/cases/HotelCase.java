@@ -5,47 +5,12 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2018/3/29.
  */
 @Document(collection="hotel_case")
-public class HotelCase {
+public class HotelCase extends Case implements Serializable{
 
-	@Id
-	private ObjectId id;
-	private String title;
-	private String coverPath;
-	private Content content;
-
-	public ObjectId getId() {
-		return id;
-	}
-
-	public void setId(ObjectId id) {
-		this.id = id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getCoverPath() {
-		return coverPath;
-	}
-
-	public void setCoverPath(String coverPath) {
-		this.coverPath = coverPath;
-	}
-
-	public Content getContent() {
-		return content;
-	}
-
-	public void setContent(Content content) {
-		this.content = content;
-	}
 }

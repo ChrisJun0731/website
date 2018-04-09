@@ -16,7 +16,7 @@
         http://www.springframework.org/schema/task/spring-task-4.2.xsd">
 
 
-	<context:component-scan base-package="mongo"/>
+	<context:component-scan base-package="mongo,services"/>
 	<import resource="spring-mongo.xml"/>
 	<context:annotation-config/>
 

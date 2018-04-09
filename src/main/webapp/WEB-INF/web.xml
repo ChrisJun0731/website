@@ -1,9 +1,14 @@
-<!DOCTYPE web-app PUBLIC
-		"-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
-		"http://java.sun.com/dtd/web-app_2_3.dtd" >
+<?xml version="1.0" encoding="utf-8"?>
 
-<web-app>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+         version="2.4">
 	<display-name>Archetype Created Web Application</display-name>
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
 
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -14,7 +19,7 @@
 	</context-param>
 
 	<servlet>
-		<servlet-name>DispatcherServlet</servlet-name>
+		<servlet-name>dispatcherServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
@@ -23,7 +28,7 @@
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>DispatcherServlet</servlet-name>
-		<url-pattern>/*</url-pattern>
+		<servlet-name>dispatcherServlet</servlet-name>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 </web-app>
