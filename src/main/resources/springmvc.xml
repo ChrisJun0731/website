@@ -25,9 +25,10 @@
 	<!--</bean>-->
 
 	<bean id="templateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
-		<property name="prefix" value="/WEB-INF/templates/"/>
+		<property name="prefix" value="WEB-INF/templates/"/>
 		<property name="suffix" value=".html"/>
 		<property name="templateMode" value="LEGACYHTML5"/>
+		<property name="characterEncoding" value="UTF-8"/>
 		<!--<property name="order" value="#{T(org.springframework.core.Ordered).HIGHEST_PRECEDENCE}"/>-->
 	</bean>
 
@@ -37,12 +38,16 @@
 
 	<bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
 		<property name="templateEngine" ref="templateEngine"/>
+		<property name="characterEncoding" value="UTF-8"/>
 	</bean>
 
 	<mvc:annotation-driven/>
-	<mvc:resources mapping="/css/**" location="/css/"/>
-	<mvc:resources mapping="/js/**" location="/js/"/>
-	<mvc:resources mapping="/style/**" location="/style/"/>
-	<mvc:resources mapping="/pics/**" location="/pics/"/>
+	<mvc:resources mapping="/css/**" location="/WEB-INF/css/"/>
+	<mvc:resources mapping="/js/**" location="/WEB-INF/js/"/>
+	<mvc:resources mapping="/js/plugins/**" location="/WEB-INF/js/plugins/"/>
+	<mvc:resources mapping="/js/controllers/**" location="/WEB-INF/js/controllers/"/>
+	<mvc:resources mapping="/style/**" location="/WEB-INF/style/"/>
+	<mvc:resources mapping="/pics/**" location="/WEB-INF/pics/"/>
+	<mvc:resources mapping="/templates/**" location="/WEB-INF/templates/"/>
 
 </beans>
