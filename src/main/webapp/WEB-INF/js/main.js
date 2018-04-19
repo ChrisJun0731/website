@@ -3,7 +3,8 @@ require.config({
     paths: {
         'angular': 'plugins/angular',
         'angular-ui-router': 'plugins/angular-ui-router',
-        'angularAMD': 'plugins/angularAMD'
+        'angularAMD': 'plugins/angularAMD',
+        'angular-file-upload': 'plugins/angular-file-upload'
     },
     shim: {
         'angular': {
@@ -11,7 +12,8 @@ require.config({
             exports: 'angular'
         },
         'angularAMD': ['angular'],
-        'angular-ui-router': ['angular']
+        'angular-ui-router': ['angular'],
+        'angular-file-upload': ['angular']
     },
     deps: ['app']
 });

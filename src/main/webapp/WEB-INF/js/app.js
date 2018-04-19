@@ -1,5 +1,5 @@
-define(['angular','angularAMD', 'angular-ui-router'], function(angular, angularAMD){
-    var app = angular.module('app', ['ui.router']);
+define(['angular','angularAMD', 'angular-ui-router', 'angular-file-upload'], function(angular, angularAMD){
+    var app = angular.module('app', ['ui.router', 'angularFileUpload']);
     app.config(function($stateProvider, $urlRouterProvider){
         $urlRouterProvider.otherwise('/news');
         $stateProvider
