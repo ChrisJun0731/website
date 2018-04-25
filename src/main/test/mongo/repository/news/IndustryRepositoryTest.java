@@ -25,17 +25,17 @@ public class IndustryRepositoryTest {
 
 	@Test
 	public void testInsert(){
-		for(int i=0; i<20; i++){
-			IndustryNews news = new IndustryNews();
-			news.setTitle("industry_news"+i);
-			news.setDate("date"+i);
-			Content content = new Content();
-			content.setText("industry_news_text" + i);
-			List<String> picPaths = new ArrayList<>();
-			picPaths.add("industry_news_path"+i);
-			content.setPicPaths(picPaths);
-			news.setContent(content);
-			industryRepository.insert(news);
-		}
+//		for(int i=0; i<20; i++){
+//			IndustryNews news = new IndustryNews();
+//			news.setTitle("industry_news"+i);
+//			news.setDate("date"+i);
+//			Content content = new Content();
+//			content.setText("industry_news_text" + i);
+//			List<String> picPaths = new ArrayList<>();
+//			picPaths.add("industry_news_path"+i);
+//			content.setPicPaths(picPaths);
+//			news.setContent(content);
+//			industryRepository.insert(news);
+//		}
 	}
 }

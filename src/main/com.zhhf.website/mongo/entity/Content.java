@@ -1,5 +1,6 @@
 package mongo.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  */
 public class Content {
 	private String text;
-	private List<String> picPaths;
+	private List<String> picPaths = new ArrayList<>();
 
 	public String getText() {
 		return text;

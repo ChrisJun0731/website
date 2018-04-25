@@ -24,17 +24,17 @@ public class StaffRepositoryTest {
 
 	@Test
 	public void testInsert(){
-		for(int i=0; i<20; i++){
-			StaffNews news = new StaffNews();
-			news.setTitle("staff_news"+i);
-			news.setDate("date"+i);
-			Content content = new Content();
-			content.setText("staff_news_text" + i);
-			List<String> picPaths = new ArrayList<>();
-			picPaths.add("staff_news_path"+i);
-			content.setPicPaths(picPaths);
-			news.setContent(content);
-			staffRepository.insert(news);
-		}
+//		for(int i=0; i<20; i++){
+//			StaffNews news = new StaffNews();
+//			news.setTitle("staff_news"+i);
+//			news.setDate("date"+i);
+//			Content content = new Content();
+//			content.setText("staff_news_text" + i);
+//			List<String> picPaths = new ArrayList<>();
+//			picPaths.add("staff_news_path"+i);
+//			content.setPicPaths(picPaths);
+//			news.setContent(content);
+//			staffRepository.insert(news);
+//		}
 	}
 }

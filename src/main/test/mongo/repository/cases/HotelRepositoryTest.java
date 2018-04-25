@@ -24,17 +24,17 @@ public class HotelRepositoryTest {
 
 	@Test
 	public void testInsert(){
-		for(int i=0; i<20; i++){
-			HotelCase cases = new HotelCase();
-			cases.setTitle("hotel_title"+i);
-			cases.setCoverPath("cover_path"+i);
-			Content content = new Content();
-			content.setText("hotel_text" + i);
-			List<String> picPaths = new ArrayList<>();
-			picPaths.add("hotel_path"+i);
-			content.setPicPaths(picPaths);
-			cases.setContent(content);
-			hotelRepository.insert(cases);
-		}
+//		for(int i=0; i<20; i++){
+//			HotelCase cases = new HotelCase();
+//			cases.setTitle("hotel_title"+i);
+//			cases.setCoverPath("cover_path"+i);
+//			Content content = new Content();
+//			content.setText("hotel_text" + i);
+//			List<String> picPaths = new ArrayList<>();
+//			picPaths.add("hotel_path"+i);
+//			content.setPicPaths(picPaths);
+//			cases.setContent(content);
+//			hotelRepository.insert(cases);
+//		}
 	}
 }

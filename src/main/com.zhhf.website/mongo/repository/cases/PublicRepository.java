@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface PublicRepository extends MongoRepository<PublicCase, ObjectId> {
+	PublicCase findByTitle(String title);
 }

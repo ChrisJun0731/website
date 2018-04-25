@@ -3,21 +3,12 @@ define(['angular','angularAMD', 'angular-ui-router', 'angular-file-upload'], fun
     app.config(function($stateProvider, $urlRouterProvider){
         $urlRouterProvider.otherwise('/news');
         $stateProvider
-            .state('news', {
-                url: '/news',
+            .state('message', {
+                url: '/message',
                 views: {
                     'container@': angularAMD.route({
-                        templateUrl: 'templates/news.html',
-                        controllerUrl: 'js/controllers/news.js'
-                    })
-                }
-            })
-            .state('cases', {
-                url: '/cases',
-                views: {
-                    'container@': angularAMD.route({
-                        templateUrl: 'templates/cases.html',
-                        controllerUrl: 'js/controllers/cases.js'
+                        templateUrl: 'templates/upload.html',
+                        controllerUrl: 'js/controllers/upload.js'
                     })
                 }
             })

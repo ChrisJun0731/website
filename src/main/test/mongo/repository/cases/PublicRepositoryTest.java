@@ -23,17 +23,17 @@ public class PublicRepositoryTest {
 
 	@Test
 	public void testInsert(){
-		for(int i=0; i<20; i++){
-			PublicCase cases = new PublicCase();
-			cases.setTitle("public_title"+i);
-			cases.setCoverPath("cover_path"+i);
-			Content content = new Content();
-			content.setText("public_text" + i);
-			List<String> picPaths = new ArrayList<>();
-			picPaths.add("public_path"+i);
-			content.setPicPaths(picPaths);
-			cases.setContent(content);
-			publicRepository.insert(cases);
-		}
+//		for(int i=0; i<20; i++){
+//			PublicCase cases = new PublicCase();
+//			cases.setTitle("public_title"+i);
+//			cases.setCoverPath("cover_path"+i);
+//			Content content = new Content();
+//			content.setText("public_text" + i);
+//			List<String> picPaths = new ArrayList<>();
+//			picPaths.add("public_path"+i);
+//			content.setPicPaths(picPaths);
+//			cases.setContent(content);
+//			publicRepository.insert(cases);
+//		}
 	}
 }

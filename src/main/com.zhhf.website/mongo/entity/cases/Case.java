@@ -13,7 +13,7 @@ public class Case {
 	private ObjectId id;
 	private String title;
 	private String coverPath;
-	private Content content;
+	private Content content = new Content();
 
 	public ObjectId getId() {
 		return id;

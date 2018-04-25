@@ -24,6 +24,11 @@
 		<!--<property name="order" value="#{T(org.springframework.core.Ordered).LOWEST_PRECEDENCE}"/>-->
 	<!--</bean>-->
 
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxInMemorySize">
+			<value>10485760</value>
+		</property>
+	</bean>
 	<bean id="templateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
 		<property name="prefix" value="WEB-INF/templates/"/>
 		<property name="suffix" value=".html"/>
@@ -48,6 +53,7 @@
 	<mvc:resources mapping="/js/controllers/**" location="/WEB-INF/js/controllers/"/>
 	<mvc:resources mapping="/style/**" location="/WEB-INF/style/"/>
 	<mvc:resources mapping="/pics/**" location="/WEB-INF/pics/"/>
+	<mvc:resources mapping="/upload/**" location="/upload/"/>
 	<mvc:resources mapping="/templates/**" location="/WEB-INF/templates/"/>
 
 </beans>

@@ -24,17 +24,17 @@ public class HouseRepositoryTest {
 
 	@Test
 	public void testInsert(){
-		for(int i=0; i<20; i++){
-			HouseCase cases = new HouseCase();
-			cases.setTitle("house_title"+i);
-			cases.setCoverPath("cover_path"+i);
-			Content content = new Content();
-			content.setText("house_text" + i);
-			List<String> picPaths = new ArrayList<>();
-			picPaths.add("house_path"+i);
-			content.setPicPaths(picPaths);
-			cases.setContent(content);
-			houseRepository.insert(cases);
-		}
+//		for(int i=0; i<20; i++){
+//			HouseCase cases = new HouseCase();
+//			cases.setTitle("house_title"+i);
+//			cases.setCoverPath("cover_path"+i);
+//			Content content = new Content();
+//			content.setText("house_text" + i);
+//			List<String> picPaths = new ArrayList<>();
+//			picPaths.add("house_path"+i);
+//			content.setPicPaths(picPaths);
+//			cases.setContent(content);
+//			houseRepository.insert(cases);
+//		}
 	}
 }

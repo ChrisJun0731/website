@@ -28,17 +28,17 @@ public class CompanyRepositoryTest {
 
 	@Test
 	public void testInsert(){
-		for(int i=0; i<20; i++){
-			CompanyNews news = new CompanyNews();
-			news.setTitle("company_news"+i);
-			news.setDate("date"+i);
-			Content content = new Content();
-			content.setText("company_news_text" + i);
-			List<String> picPaths = new ArrayList<>();
-			picPaths.add("company_news_path"+i);
-			content.setPicPaths(picPaths);
-			news.setContent(content);
-			companyRepository.insert(news);
-		}
+//		for(int i=0; i<20; i++){
+//			CompanyNews news = new CompanyNews();
+//			news.setTitle("company_news"+i);
+//			news.setDate("date"+i);
+//			Content content = new Content();
+//			content.setText("company_news_text" + i);
+//			List<String> picPaths = new ArrayList<>();
+//			picPaths.add("company_news_path"+i);
+//			content.setPicPaths(picPaths);
+//			news.setContent(content);
+//			companyRepository.insert(news);
+//		}
 	}
 }
