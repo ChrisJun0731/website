@@ -4,10 +4,12 @@ import mongo.entity.Content;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2018/3/31.
  */
-public class Case {
+public class Case implements Serializable{
 
 	@Id
 	private ObjectId id;

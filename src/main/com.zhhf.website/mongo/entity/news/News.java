@@ -4,16 +4,18 @@ import mongo.entity.Content;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2018/3/31.
  */
-public class News {
+public class News implements Serializable{
 
 	@Id
 	private ObjectId id;
 	private String title;
 	private String date;
-	private Content content;
+	private Content content = new Content();
 
 	public ObjectId getId() {
 		return id;

@@ -8,13 +8,14 @@
 			<textarea name="desc" ng-model="desc"/>
 
 			<h3>类别1</h3>
+			<select ng-model="type1">
+				<option value="news" ng-click="changeType2('news')">新闻</option>
+				<option value="cases" ng-click="changeType2('cases')">案例</option>
+				<option value="join" ng-click="changeType2('join')">加入我们</option>
+			</select>
 
 			<h3>类别2</h3>
-			<select ng-model="type">
-				<option value="hotel">酒店</option>
-				<option value="public">公共装饰</option>
-				<option value="house">住宅</option>
-			</select>
+			<select ng-model="type2" ng-options="typeName.val as typeName.name for typeName in typeNames"></select>
 
 			<h3>Select Files</h3>
 			<input type="file" name="file" nv-file-select="" uploader="uploader" multiple>

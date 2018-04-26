@@ -11,6 +11,6 @@ import java.io.Serializable;
  * Created by Administrator on 2018/3/29.
  */
 @Document(collection="staff_news")
-public class StaffNews extends News implements Serializable{
+public class StaffNews extends News{
 
 }

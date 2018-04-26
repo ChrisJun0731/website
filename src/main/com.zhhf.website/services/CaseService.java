@@ -1,12 +1,12 @@
 package services;
 
 import mongo.entity.cases.Case;
+import mongo.entity.cases.CommercialCase;
 import mongo.entity.cases.HotelCase;
-import mongo.entity.cases.HouseCase;
-import mongo.entity.cases.PublicCase;
+import mongo.entity.cases.OfficeCase;
 import mongo.repository.cases.HotelRepository;
-import mongo.repository.cases.HouseRepository;
-import mongo.repository.cases.PublicRepository;
+import mongo.repository.cases.OfficeRepository;
+import mongo.repository.cases.CommercialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,11 +21,11 @@ import java.util.List;
 public class CaseService {
 
 	@Autowired
-	private PublicRepository publicRepository;
+	private CommercialRepository publicRepository;
 	@Autowired
 	private HotelRepository hotelRepository;
 	@Autowired
-	private HouseRepository houseRepository;
+	private OfficeRepository houseRepository;
 
 	/**
 	 * 查询装修案例的总数
@@ -58,7 +58,7 @@ public class CaseService {
 		List<? extends Case> pageList = null;
 		switch(type){
 			case "public":
-				Page<PublicCase> public_page = publicRepository.findAll(pageRequest);
+				Page<CommercialCase> public_page = publicRepository.findAll(pageRequest);
 				pageList = public_page.getContent();
 				break;
 			case "hotel":
@@ -66,7 +66,7 @@ public class CaseService {
 				pageList = hotel_page.getContent();
 				break;
 			case "house":
-				Page<HouseCase> house_page = houseRepository.findAll(pageRequest);
+				Page<OfficeCase> house_page = houseRepository.findAll(pageRequest);
 				pageList = house_page.getContent();
 				break;
 		}
@@ -81,13 +81,13 @@ public class CaseService {
 	public void insert(String type, Case cases){
 		switch(type){
 			case "public":
-				publicRepository.insert((PublicCase)cases);
+				publicRepository.insert((CommercialCase)cases);
 				break;
 			case "hotel":
 				hotelRepository.insert((HotelCase)cases);
 				break;
 			case "house":
-				houseRepository.insert((HouseCase)cases);
+				houseRepository.insert((OfficeCase)cases);
 				break;
 		}
 	}

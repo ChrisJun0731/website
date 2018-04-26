@@ -10,7 +10,7 @@ import java.io.Serializable;
 /**
  * Created by Administrator on 2018/3/29.
  */
-@Document(collection = "public_case")
-public class PublicCase extends Case implements Serializable{
+@Document(collection = "commercial_case")
+public class CommercialCase extends Case {
 
 }

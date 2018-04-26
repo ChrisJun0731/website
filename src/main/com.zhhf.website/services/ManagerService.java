@@ -1,21 +1,30 @@
 package services;
 
-import mongo.dao.cases.HotelDao;
-import mongo.dao.cases.HouseDao;
-import mongo.dao.cases.PublicDao;
-import mongo.entity.cases.HotelCase;
-import mongo.entity.cases.HouseCase;
-import mongo.entity.cases.PublicCase;
-import mongo.repository.cases.HotelRepository;
-import mongo.repository.cases.HouseRepository;
-import mongo.repository.cases.PublicRepository;
+import mongo.dao.cases.*;
+import mongo.dao.join.PTrainDao;
+import mongo.dao.news.CompanyDao;
+import mongo.dao.news.IndustryDao;
+import mongo.dao.news.NewsDao;
+import mongo.dao.news.StaffDao;
+import mongo.entity.cases.*;
+import mongo.entity.join.PTrain;
+import mongo.entity.news.CompanyNews;
+import mongo.entity.news.IndustryNews;
+import mongo.entity.news.StaffNews;
+import mongo.repository.cases.*;
+import mongo.repository.join.PersonalTrainRepository;
+import mongo.repository.news.CompanyRepository;
+import mongo.repository.news.IndustryRepository;
+import mongo.repository.news.StaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,32 +34,49 @@ import java.util.List;
 public class ManagerService {
 
 	@Autowired
-	private PublicRepository publicRepository;
+	private CommercialRepository commCaseRepository;
 	@Autowired
-	private HotelRepository hotelRepository;
+	private HotelRepository hotelCaseRepository;
 	@Autowired
-	private HouseRepository houseRepository;
+	private OfficeRepository officeCaseRepository;
 	@Autowired
-	private PublicDao publicDao;
+	private RestaurantRepository restCaseRepository;
 	@Autowired
-	private HotelDao hotelDao;
-	@Autowired
-	private HouseDao houseDao;
+	private EduRepository eduCaseRepository;
 
+	@Autowired
+	private CompanyRepository comNewsRepository;
+	@Autowired
+	private IndustryRepository indNewsRepository;
+	@Autowired
+	private StaffRepository staffNewsRepository;
+
+	@Autowired
+	private PersonalTrainRepository pTrainRepository;
+
+	@Autowired
+	private CaseDao caseDao;
+
+	@Autowired
+	private NewsDao newsDao;
+
+	@Autowired
+	private PTrainDao pTrainDao;
 
 	/**
 	 * 上传文件
+	 *
 	 * @param file
-	 * @param type
+	 * @param type1, type2
 	 * @param title
 	 */
-	public String uploadFile(MultipartFile file, String type, String title){
+	public String uploadFile(MultipartFile file, String type1, String type2, String title) {
 		//获取root路径
 		String root = System.getenv("CATALINA_HOME") + "/webapps/website";
-		String path = "/upload/"+type+"/"+title+"/";
+		String path = "/upload/" + type1 + "/" + type2 + "/" + title + "/";
 		String fileName = file.getOriginalFilename();
-		File uploadDir = new File(root+path);
-		if(!uploadDir.exists()){
+		File uploadDir = new File(root + path);
+		if (!uploadDir.exists()) {
 			uploadDir.mkdirs();
 		}
 		String destFilePath = root + path + fileName;
@@ -63,66 +89,156 @@ public class ManagerService {
 			e.printStackTrace();
 		}
 
-		return path+fileName;
+		return path + fileName;
 	}
 
 
 	/**
 	 * 将上传的数据入库
-	 * @param type
+	 *
+	 * @param type1,type2
 	 * @param title
 	 * @param desc
 	 * @param picPath
 	 */
-	public void save(String type, String title, String desc, String picPath){
+	public void save(String type1, String type2, String title, String desc, String picPath) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String dateStr = dateFormat.format(new Date());
+		switch (type1) {
+			//新闻类
+			case "news":
+				switch (type2) {
+					case "company":
+						//判断该新闻标题是否存在，不存在新增，存在则更新
+						CompanyNews comNews = comNewsRepository.findByTitle(title);
+						if (comNews != null) {
+							newsDao.addPicPaths(title, desc, picPath, "company_news");
+						} else {
+							comNews = new CompanyNews();
+							comNews.setTitle(title);
+							comNews.setDate(dateStr);
+							comNews.getContent().setText(desc);
+							comNews.getContent().getPicPaths().add(picPath);
+							comNewsRepository.insert(comNews);
+						}
+						break;
+					case "industry":
+						IndustryNews indusNews = indNewsRepository.findByTitle(title);
+						if (indusNews != null) {
+							newsDao.addPicPaths(title, desc, picPath, "industry_news");
+						} else {
+							indusNews = new IndustryNews();
+							indusNews.setTitle(title);
+							indusNews.setDate(dateStr);
+							indusNews.getContent().setText(desc);
+							indusNews.getContent().getPicPaths().add(picPath);
+							indNewsRepository.insert(indusNews);
+						}
+						break;
+					case "staff":
+						StaffNews staffNews = staffNewsRepository.findByTitle(title);
+						if (staffNews != null) {
+							newsDao.addPicPaths(title, desc, picPath, "staff_news");
+						} else {
+							staffNews = new StaffNews();
+							staffNews.setTitle(title);
+							staffNews.setDate(dateStr);
+							staffNews.getContent().setText(desc);
+							staffNews.getContent().getPicPaths().add(picPath);
+							staffNewsRepository.insert(staffNews);
+						}
+						break;
+				}
+				//案例类
+			case "cases":
+				switch (type2) {
+					case "office":
+						System.out.println("将新增一条办公空间案例.");
+						OfficeCase officeCase = officeCaseRepository.findByTitle(title);
+						if (officeCase != null) {
+							caseDao.addPicPath(title, picPath, "office_case");
+						} else {
+							officeCase = new OfficeCase();
+							officeCase.setTitle(title);
+							officeCase.setCoverPath(picPath);
+							officeCase.getContent().setText(desc);
+							officeCase.getContent().getPicPaths().add(picPath);
+							officeCaseRepository.insert(officeCase);
+						}
+						break;
+					case "commercial":
+						System.out.println("将新增一条商业空间案例.");
+						CommercialCase commCase = commCaseRepository.findByTitle(title);
+						if (commCase != null) {
+							caseDao.addPicPath(title, picPath, "commercial_case");
+						} else {
+							commCase = new CommercialCase();
+							commCase.setTitle(title);
+							commCase.setCoverPath(picPath);
+							commCase.getContent().setText(desc);
+							commCase.getContent().getPicPaths().add(picPath);
+							commCaseRepository.insert(commCase);
+						}
+						break;
+					case "hotel":
+						System.out.println("将新增一条酒店装饰信息.");
+						HotelCase hotelCase = hotelCaseRepository.findByTitle(title);
+						if (hotelCase != null) {
+							caseDao.addPicPath(title, picPath, "hotel_case");
+						} else {
+							hotelCase = new HotelCase();
+							hotelCase.setCoverPath(picPath);
+							hotelCase.setTitle(title);
+							hotelCase.getContent().setText(desc);
+							hotelCase.getContent().getPicPaths().add(picPath);
+							hotelCaseRepository.insert(hotelCase);
+						}
+						break;
+					case "restaurant":
+						System.out.println("将新增一条餐饮案例.");
+						RestaurantCase restCase = restCaseRepository.findByTitle(title);
+						if (restCase != null) {
+							caseDao.addPicPath(title, picPath, "restaurant_case");
+						} else {
+							restCase = new RestaurantCase();
+							restCase.setCoverPath(picPath);
+							restCase.setTitle(title);
+							restCase.getContent().setText(desc);
+							restCase.getContent().getPicPaths().add(picPath);
+							restCaseRepository.insert(restCase);
+						}
+						break;
+					case "education":
+						System.out.println("将新增一条教育案例.");
+						EduCase eduCase = eduCaseRepository.findByTitle(title);
+						if (eduCase != null) {
+							caseDao.addPicPath(title, picPath, "education_case");
+						} else {
+							eduCase = new EduCase();
+							eduCase.setCoverPath(picPath);
+							eduCase.setTitle(title);
+							eduCase.getContent().setText(desc);
+							eduCase.getContent().getPicPaths().add(picPath);
+							eduCaseRepository.insert(eduCase);
+						}
+						break;
+				}
+				//加入我们
+			case "join":
+				switch (type2) {
+					case "p_train":
+						PTrain pTrain = pTrainRepository.findByTitle(title);
+						if (pTrain != null) {
+							pTrainDao.addPicPaths(title, picPath, "personal_train");
+						} else {
+							pTrain = new PTrain();
+							pTrain.setTitle(title);
+							pTrain.setDate(dateStr);
+							pTrain.getContent().setText(desc);
+							pTrain.getContent().getPicPaths().add(picPath);
+							pTrainRepository.insert(pTrain);
+						}
 
-		switch(type){
-			case "public":
-				System.out.println("将新增一条公共装饰信息.");
-				PublicCase pubCase = publicRepository.findByTitle(title);
-				if(pubCase != null){
-					publicDao.addPicPath(title, picPath);
-				}else{
-					pubCase = new PublicCase();
-					List<String> picPaths = new ArrayList();
-					picPaths.add(picPath);
-					pubCase.setTitle(title);
-					pubCase.setCoverPath(picPath);
-					pubCase.getContent().setText(desc);
-					pubCase.getContent().setPicPaths(picPaths);
-					publicRepository.insert(pubCase);
-				}
-				break;
-			case "house":
-				System.out.println("将新增一条家装信息.");
-				HouseCase houseCase = houseRepository.findByTitle(title);
-				if(houseCase != null){
-					houseDao.addPicPath(title, picPath);
-				}else{
-					houseCase = new HouseCase();
-					List<String> picPaths = new ArrayList();
-					picPaths.add(picPath);
-					houseCase.setCoverPath(picPath);
-					houseCase.setTitle(title);
-					houseCase.getContent().setText(desc);
-					houseCase.getContent().setPicPaths(picPaths);
-					houseRepository.insert(houseCase);
-				}
-				break;
-			case "hotel":
-				System.out.println("将新增一条酒店装饰信息.");
-				HotelCase hotelCase = hotelRepository.findByTitle(title);
-				if(hotelCase != null){
-					hotelDao.addPicPath(title, picPath);
-				}else{
-					hotelCase = new HotelCase();
-					List<String> picPaths = new ArrayList();
-					picPaths.add(picPath);
-					hotelCase.setCoverPath(picPath);
-					hotelCase.setTitle(title);
-					hotelCase.getContent().setText(desc);
-					hotelCase.getContent().setPicPaths(picPaths);
-					hotelRepository.insert(hotelCase);
 				}
 		}
 	}

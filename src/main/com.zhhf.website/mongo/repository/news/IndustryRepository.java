@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface IndustryRepository extends MongoRepository<IndustryNews, ObjectId> {
-
+	public IndustryNews findByTitle(String title);
 }

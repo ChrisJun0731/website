@@ -11,6 +11,6 @@ import java.io.Serializable;
  * Created by Administrator on 2018/3/29.
  */
 @Document(collection="hotel_case")
-public class HotelCase extends Case implements Serializable{
+public class HotelCase extends Case{
 
 }

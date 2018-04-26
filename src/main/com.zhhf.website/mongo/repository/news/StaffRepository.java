@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface StaffRepository extends MongoRepository<StaffNews, ObjectId>{
-
+	public StaffNews findByTitle(String title);
 }

@@ -11,6 +11,6 @@ import org.springframework.stereotype.Component;
  * Created by Administrator on 2018/4/21.
  */
 @Component
-public class HotelDao extends CaseDao{
+public class CommercialDao extends CaseDao {
 
 }

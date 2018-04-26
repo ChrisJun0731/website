@@ -1,7 +1,7 @@
 define(['angular','angularAMD', 'angular-ui-router', 'angular-file-upload'], function(angular, angularAMD){
     var app = angular.module('app', ['ui.router', 'angularFileUpload']);
     app.config(function($stateProvider, $urlRouterProvider){
-        $urlRouterProvider.otherwise('/news');
+        $urlRouterProvider.otherwise('/message');
         $stateProvider
             .state('message', {
                 url: '/message',
