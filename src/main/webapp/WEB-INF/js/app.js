@@ -12,6 +12,15 @@ define(['angular','angularAMD', 'angular-ui-router', 'angular-file-upload'], fun
                     })
                 }
             })
+            .state("recruit", {
+                url: '/recruit',
+                views: {
+                    'container@': angularAMD.route({
+                        templateUrl: 'templates/recruit.html',
+                        controllerUrl: 'js/controllers/recruit.js'
+                    })
+                }
+            })
     });
 
     return angularAMD.bootstrap(app);

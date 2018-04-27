@@ -27,20 +27,12 @@ define(['../services/uploadService.js'], function(){
                         {'name':'酒店会所', 'val':'hotel'},
                         {'name':'教育机构', 'val':'education'}
                     ];
-                    $scope.type2 = 'office';
-                    break;
                 case 'join':
                     $scope.typeNames = [
                         {'name':'人才培养', 'val':'p_train'}
                     ];
-                    $scope.type2 = 'p_train';
-                    break;
             }
         }
-
-         $scope.type1 = 'news';
-         $scope.changeType2($scope.type1);
-
 
 
     }];
