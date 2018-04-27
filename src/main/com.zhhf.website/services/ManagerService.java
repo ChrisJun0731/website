@@ -109,10 +109,10 @@ public class ManagerService {
 			case "news":
 				switch (type2) {
 					case "company":
-						//判断该新闻标题是否存在，不存在新增，存在则更新
+						//判断该新闻标题是否存在，不存在新增，存在则添加图片的路径
 						CompanyNews comNews = comNewsRepository.findByTitle(title);
 						if (comNews != null) {
-							newsDao.addPicPaths(title, desc, picPath, "company_news");
+							newsDao.addPicPaths(title, picPath, "company_news");
 						} else {
 							comNews = new CompanyNews();
 							comNews.setTitle(title);
@@ -125,7 +125,7 @@ public class ManagerService {
 					case "industry":
 						IndustryNews indusNews = indNewsRepository.findByTitle(title);
 						if (indusNews != null) {
-							newsDao.addPicPaths(title, desc, picPath, "industry_news");
+							newsDao.addPicPaths(title, picPath, "industry_news");
 						} else {
 							indusNews = new IndustryNews();
 							indusNews.setTitle(title);
@@ -138,7 +138,7 @@ public class ManagerService {
 					case "staff":
 						StaffNews staffNews = staffNewsRepository.findByTitle(title);
 						if (staffNews != null) {
-							newsDao.addPicPaths(title, desc, picPath, "staff_news");
+							newsDao.addPicPaths(title, picPath, "staff_news");
 						} else {
 							staffNews = new StaffNews();
 							staffNews.setTitle(title);

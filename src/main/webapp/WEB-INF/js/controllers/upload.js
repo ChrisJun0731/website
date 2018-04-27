@@ -6,7 +6,7 @@ define(['../services/uploadService.js'], function(){
         };
         $scope.uploader.onBeforeUploadItem = function(item){
             console.log("type is" + $scope.type + ",title is " + $scope.title + ",desc is " + $scope.desc);
-            item.url = 'upload?type1='+$scope.type+"&type2="+$scope.type2+"&title="+$scope.title+"&desc="+$scope.desc;
+            item.url = 'upload?type1='+$scope.type1+"&type2="+$scope.type2+"&title="+$scope.title+"&desc="+$scope.desc;
         };
 
         $scope.changeType2 = function(type1){
@@ -17,6 +17,7 @@ define(['../services/uploadService.js'], function(){
                         {'name':'行业动态', 'val':'industry'},
                         {'name':'员工风采', 'val':'staff'}
                     ];
+                    $scope.type2 = 'company';
                     break;
                 case 'cases':
                     $scope.typeNames = [
@@ -26,12 +27,20 @@ define(['../services/uploadService.js'], function(){
                         {'name':'酒店会所', 'val':'hotel'},
                         {'name':'教育机构', 'val':'education'}
                     ];
+                    $scope.type2 = 'office';
+                    break;
                 case 'join':
                     $scope.typeNames = [
                         {'name':'人才培养', 'val':'p_train'}
                     ];
+                    $scope.type2 = 'p_train';
+                    break;
             }
         }
+
+         $scope.type1 = 'news';
+         $scope.changeType2($scope.type1);
+
 
 
     }];

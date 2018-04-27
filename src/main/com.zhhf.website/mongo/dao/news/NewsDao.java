@@ -16,7 +16,7 @@ public class NewsDao {
 	@Autowired
 	private MongoTemplate mongoTemplate;
 
-	public void addPicPaths(String title, String desc, String picPath, String collName){
+	public void addPicPaths(String title, String picPath, String collName){
 		Query query = Query.query(Criteria.where("title").is(title));
 		Update update = new Update().addToSet("content.picPaths", picPath);
 		mongoTemplate.updateFirst(query, update, collName);
