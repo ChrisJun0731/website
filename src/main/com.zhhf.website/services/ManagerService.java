@@ -307,19 +307,19 @@ public class ManagerService {
 			case "cases":
 				switch(type2){
 					case "office":
-						caseDao.delTitle(title, "office_cases");
+						caseDao.delTitle(title, "office_case");
 						break;
 					case "commercial":
-						caseDao.delTitle(title, "commercial_cases");
+						caseDao.delTitle(title, "commercial_case");
 						break;
 					case "hotel":
-						caseDao.delTitle(title, "hotel_cases");
+						caseDao.delTitle(title, "hotel_case");
 						break;
 					case "restaurant":
-						caseDao.delTitle(title, "restaurant_cases");
+						caseDao.delTitle(title, "restaurant_case");
 						break;
 					case "education":
-						caseDao.delTitle(title, "education_cases");
+						caseDao.delTitle(title, "education_case");
 						break;
 				}
 				break;

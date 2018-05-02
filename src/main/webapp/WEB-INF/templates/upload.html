@@ -87,22 +87,22 @@
 				</button>
 			</div>
 
-			<!--<div>-->
-				<!--<h2>删除</h2>-->
-				<!--<div>-->
-					<!--<button class="btn btn-default" ng-click="queryResults()">查询</button>-->
-				<!--</div>-->
-				<!--<tabel>-->
-					<!--<tr>-->
-						<!--<th>名称</th>-->
-						<!--<th>操作</th>-->
-					<!--</tr>-->
-					<!--<tr ng-repeat="result in results">-->
-						<!--<td>{{result.title}}</td>-->
-						<!--<td><button class="btn" ng-click="delResult(result.title)">删除</button></td>-->
-					<!--</tr>-->
-				<!--</tabel>-->
-			<!--</div>-->
+			<div>
+				<h2>删除</h2>
+				<div>
+					<button class="btn btn-default" ng-click="queryResults()">查询</button>
+				</div>
+				<table>
+					<tr>
+						<th>名称</th>
+						<th>操作</th>
+					</tr>
+					<tr ng-repeat="result in results">
+						<td>{{result.title}}</td>
+						<td><button class="btn" ng-click="delResult(result.title)">删除</button></td>
+					</tr>
+				</table>
+			</div>
 		</div>
 	</div>
 </div>

@@ -8,8 +8,8 @@ define(['app'], function(app){
                 return promise;
             },
 
-            delResult: function(data){
-                $http.get('delResult', data);
+            delResult: function(config){
+                $http.get('delResult', config);
             }
         };
 

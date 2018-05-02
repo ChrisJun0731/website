@@ -56,7 +56,11 @@ define(['../services/uploadService.js'], function(){
 
         $scope.delResult = function(title){
             var config = {params: {type1: $scope.type1, type2: $scope.type2, title:title}};
-        }
+            uploadService.delResult(config);
+            uploadService.queryResults(config).then(function(data){
+                $scope.results = data;
+            });
+        };
 
     }];
 });
