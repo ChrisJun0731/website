@@ -1,26 +1,28 @@
 <section>
-	<table>
-		<tr>
-			<th>职位</th>
-			<th>数量</th>
-			<th>位置</th>
-			<th>日期</th>
-			<th>操作</th>
-		</tr>
-		<tr ng-repeat="recruit in recruits">
-			<td></td>
-			<td>{{recruit.position}}</td>
-			<td>{{recruit.num}}</td>
-			<td>{{recruit.site}}</td>
-			<td>{{recruit.date}}</td>
-			<td>
-				<button class="btn-default" ng-click="addRecruit(recruit)">新增</button>
-				<button class="btn-default" ng-click="delRecruit(recruit)">删除</button>
-			</td>
-		</tr>
-		<tr>
-			<button class="btn" ng-click="upload()">上传</button>
-		</tr>
-	</table>
-
+	<div class="container">
+		<div class="row">
+			<table class="table-default">
+				<tr>
+					<th>职位</th>
+					<th>数量</th>
+					<th>位置</th>
+					<th>操作</th>
+				</tr>
+				<tr ng-repeat="recruit in recruits">
+					<td><input type="text" ng-model="recruit.position"></td>
+					<td><input type="text" ng-model="recruit.num"></td>
+					<td><input type="text" ng-model="recruit.site"></td>
+					<td>
+						<button class="btn-default" ng-click="addRecruit()">新增</button>
+						<button class="btn-default" ng-click="delRecruit(recruit)">删除</button>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<button class="btn" ng-click="upload()">上传</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
 </section>

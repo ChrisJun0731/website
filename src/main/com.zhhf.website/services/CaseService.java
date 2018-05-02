@@ -1,12 +1,7 @@
 package services;
 
-import mongo.entity.cases.Case;
-import mongo.entity.cases.CommercialCase;
-import mongo.entity.cases.HotelCase;
-import mongo.entity.cases.OfficeCase;
-import mongo.repository.cases.HotelRepository;
-import mongo.repository.cases.OfficeRepository;
-import mongo.repository.cases.CommercialRepository;
+import mongo.entity.cases.*;
+import mongo.repository.cases.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,11 +16,15 @@ import java.util.List;
 public class CaseService {
 
 	@Autowired
-	private CommercialRepository publicRepository;
+	private OfficeRepository officeRepository;
+	@Autowired
+	private CommercialRepository commRepository;
 	@Autowired
 	private HotelRepository hotelRepository;
 	@Autowired
-	private OfficeRepository houseRepository;
+	private RestaurantRepository restRepository;
+	@Autowired
+	private EduRepository eduRepository;
 
 	/**
 	 * 查询装修案例的总数
@@ -34,14 +33,20 @@ public class CaseService {
 	public int count_size(String type){
 		int size = 0;
 		switch(type){
-			case "public":
-				size = (int)publicRepository.count();
+			case "office":
+				size = (int)officeRepository.count();
 				break;
-			case "house":
-				size = (int)houseRepository.count();
+			case "commercial":
+				size = (int)commRepository.count();
 				break;
 			case "hotel":
 				size = (int)hotelRepository.count();
+				break;
+			case "restaurant":
+				size = (int)restRepository.count();
+				break;
+			case "edu":
+				size = (int)eduRepository.count();
 				break;
 		}
 		return size;
@@ -57,17 +62,25 @@ public class CaseService {
 		PageRequest pageRequest = new PageRequest(page, pageSize);
 		List<? extends Case> pageList = null;
 		switch(type){
-			case "public":
-				Page<CommercialCase> public_page = publicRepository.findAll(pageRequest);
-				pageList = public_page.getContent();
+			case "office":
+				Page<OfficeCase> office_page = officeRepository.findAll(pageRequest);
+				pageList = office_page.getContent();
 				break;
 			case "hotel":
 				Page<HotelCase> hotel_page = hotelRepository.findAll(pageRequest);
 				pageList = hotel_page.getContent();
 				break;
-			case "house":
-				Page<OfficeCase> house_page = houseRepository.findAll(pageRequest);
-				pageList = house_page.getContent();
+			case "commercial":
+				Page<CommercialCase> comm_page = commRepository.findAll(pageRequest);
+				pageList = comm_page.getContent();
+				break;
+			case "restaurant":
+				Page<RestaurantCase> rest_page = restRepository.findAll(pageRequest);
+				pageList = rest_page.getContent();
+				break;
+			case "edu":
+				Page<EduCase> edu_page = eduRepository.findAll(pageRequest);
+				pageList = edu_page.getContent();
 				break;
 		}
 		return pageList;
@@ -80,14 +93,20 @@ public class CaseService {
 	 */
 	public void insert(String type, Case cases){
 		switch(type){
-			case "public":
-				publicRepository.insert((CommercialCase)cases);
+			case "office":
+				officeRepository.insert((OfficeCase) cases);
 				break;
 			case "hotel":
 				hotelRepository.insert((HotelCase)cases);
 				break;
-			case "house":
-				houseRepository.insert((OfficeCase)cases);
+			case "commercial":
+				commRepository.insert((CommercialCase)cases);
+				break;
+			case "restaurant":
+				restRepository.insert((RestaurantCase)cases);
+				break;
+			case "edu":
+				eduRepository.insert((EduCase)cases);
 				break;
 		}
 	}
@@ -100,14 +119,20 @@ public class CaseService {
 	public List<? extends Case> findAll(String type){
 		List<? extends Case> cases = null;
 		switch(type){
-			case "public":
-				cases = publicRepository.findAll();
+			case "office":
+				cases = officeRepository.findAll();
+				break;
+			case "commercial":
+				cases = commRepository.findAll();
+				break;
+			case "restaurant":
+				cases = restRepository.findAll();
 				break;
 			case "hotel":
 				cases = hotelRepository.findAll();
 				break;
-			case "house":
-				cases = houseRepository.findAll();
+			case "edu":
+				cases = eduRepository.findAll();
 				break;
 		}
 		return cases;

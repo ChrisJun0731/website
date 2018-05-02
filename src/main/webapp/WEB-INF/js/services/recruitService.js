@@ -3,7 +3,7 @@ define(['app'], function(app){
         var recruitService = {
 
             upload: function(recruits){
-                $http.post('/join', recruits);
+                $http.post('join/recruit', recruits);
             }
 
         };

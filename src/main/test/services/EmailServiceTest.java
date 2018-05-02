@@ -21,12 +21,11 @@ public class EmailServiceTest {
 
 	@Test
 	public void sendEmailTest(){
-		MessageInfo info = new MessageInfo();
-		info.setName("chris");
-		info.setMessage("吧啦啦啦");
-		info.setEmail("2323@qq.com");
-
-		emailService.sendMail(info);
+//		MessageInfo info = new MessageInfo();
+//		info.setName("chris");
+//		info.setMessage("吧啦啦啦");
+//		info.setEmail("2323@qq.com");
+//		emailService.sendMail(info);
 	}
 
 

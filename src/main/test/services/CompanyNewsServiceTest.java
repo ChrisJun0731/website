@@ -23,18 +23,18 @@ public class CompanyNewsServiceTest {
 
 	@Test
 	public void testInsertNews() throws Exception {
-		for (int i = 0; i < 10; i++) {
-			CompanyNews companyNews = new CompanyNews();
-			companyNews.setTitle("news" + i);
-			companyNews.setDate("" + i);
-			Content content = new Content();
-			content.setText("test"+i);
-			List<String> picPaths = new ArrayList<>();
-			picPaths.add("pic"+i);
-			content.setPicPaths(picPaths);
-			companyNews.setContent(content);
-			newsService.insertNews("company", companyNews);
-		}
+//		for (int i = 0; i < 10; i++) {
+//			CompanyNews companyNews = new CompanyNews();
+//			companyNews.setTitle("news" + i);
+//			companyNews.setDate("" + i);
+//			Content content = new Content();
+//			content.setText("test"+i);
+//			List<String> picPaths = new ArrayList<>();
+//			picPaths.add("pic"+i);
+//			content.setPicPaths(picPaths);
+//			companyNews.setContent(content);
+//			newsService.insertNews("company", companyNews);
+//		}
 	}
 
 }

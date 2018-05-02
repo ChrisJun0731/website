@@ -17,18 +17,20 @@ define(['../services/recruitService.js'], function(){
             }
         }
 
-        $scope.recruits = [];
+        $scope.recruits = [
+            {"position":"", "num": "", "site": ""}
+        ];
 
-        $scope.addRecruit = function(recruit){
-            $scope.recruits.push(recruit);
-        }
+        $scope.addRecruit = function(){
+            $scope.recruits.push({"position":"", "num":"", "site": ""});
+        };
 
-        $scope.removeRecruit = function(recruit){
+        $scope.delRecruit = function(recruit){
             $scope.recruits.remove(recruit);
-        }
+        };
 
         $scope.upload = function(){
-
-        }
+            recruitService.upload($scope.recruits);
+        };
     }];
 });

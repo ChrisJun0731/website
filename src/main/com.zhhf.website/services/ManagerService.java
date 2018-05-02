@@ -72,8 +72,8 @@ public class ManagerService {
 	 */
 	public String uploadFile(MultipartFile file, String type1, String type2, String title) {
 		//获取root路径
-		String root = System.getenv("CATALINA_HOME") + "/webapps/website";
-		String path = "/upload/" + type1 + "/" + type2 + "/" + title + "/";
+		String root = System.getenv("CATALINA_HOME") + "/webapps";
+		String path = "/website/upload/" + type1 + "/" + type2 + "/" + title + "/";
 		String fileName = file.getOriginalFilename();
 		File uploadDir = new File(root + path);
 		if (!uploadDir.exists()) {
@@ -111,7 +111,7 @@ public class ManagerService {
 					case "company":
 						//判断该新闻标题是否存在，不存在新增，存在则添加图片的路径
 						CompanyNews comNews = comNewsRepository.findByTitle(title);
-						if (comNews != null) {
+						if (comNews != null && picPath!=null) {
 							newsDao.addPicPaths(title, picPath, "company_news");
 						} else {
 							comNews = new CompanyNews();
@@ -124,7 +124,7 @@ public class ManagerService {
 						break;
 					case "industry":
 						IndustryNews indusNews = indNewsRepository.findByTitle(title);
-						if (indusNews != null) {
+						if (indusNews != null&& picPath!=null) {
 							newsDao.addPicPaths(title, picPath, "industry_news");
 						} else {
 							indusNews = new IndustryNews();
@@ -137,7 +137,7 @@ public class ManagerService {
 						break;
 					case "staff":
 						StaffNews staffNews = staffNewsRepository.findByTitle(title);
-						if (staffNews != null) {
+						if (staffNews != null&& picPath!=null) {
 							newsDao.addPicPaths(title, picPath, "staff_news");
 						} else {
 							staffNews = new StaffNews();
@@ -155,7 +155,7 @@ public class ManagerService {
 					case "office":
 						System.out.println("将新增一条办公空间案例.");
 						OfficeCase officeCase = officeCaseRepository.findByTitle(title);
-						if (officeCase != null) {
+						if (officeCase != null&& picPath!=null) {
 							caseDao.addPicPath(title, picPath, "office_case");
 						} else {
 							officeCase = new OfficeCase();
@@ -169,7 +169,7 @@ public class ManagerService {
 					case "commercial":
 						System.out.println("将新增一条商业空间案例.");
 						CommercialCase commCase = commCaseRepository.findByTitle(title);
-						if (commCase != null) {
+						if (commCase != null&& picPath!=null) {
 							caseDao.addPicPath(title, picPath, "commercial_case");
 						} else {
 							commCase = new CommercialCase();
@@ -183,7 +183,7 @@ public class ManagerService {
 					case "hotel":
 						System.out.println("将新增一条酒店装饰信息.");
 						HotelCase hotelCase = hotelCaseRepository.findByTitle(title);
-						if (hotelCase != null) {
+						if (hotelCase != null&& picPath!=null) {
 							caseDao.addPicPath(title, picPath, "hotel_case");
 						} else {
 							hotelCase = new HotelCase();
@@ -197,7 +197,7 @@ public class ManagerService {
 					case "restaurant":
 						System.out.println("将新增一条餐饮案例.");
 						RestaurantCase restCase = restCaseRepository.findByTitle(title);
-						if (restCase != null) {
+						if (restCase != null&& picPath!=null) {
 							caseDao.addPicPath(title, picPath, "restaurant_case");
 						} else {
 							restCase = new RestaurantCase();
@@ -211,7 +211,7 @@ public class ManagerService {
 					case "education":
 						System.out.println("将新增一条教育案例.");
 						EduCase eduCase = eduCaseRepository.findByTitle(title);
-						if (eduCase != null) {
+						if (eduCase != null&& picPath!=null) {
 							caseDao.addPicPath(title, picPath, "education_case");
 						} else {
 							eduCase = new EduCase();
@@ -228,7 +228,7 @@ public class ManagerService {
 				switch (type2) {
 					case "p_train":
 						PTrain pTrain = pTrainRepository.findByTitle(title);
-						if (pTrain != null) {
+						if (pTrain != null&& picPath!=null) {
 							pTrainDao.addPicPaths(title, picPath, "personal_train");
 						} else {
 							pTrain = new PTrain();
@@ -240,6 +240,96 @@ public class ManagerService {
 						}
 
 				}
+		}
+	}
+
+	public Object queryResults(String type1, String type2){
+		Object obj = null;
+		switch(type1){
+			case "news":
+				switch(type2){
+					case "company":
+						obj = (Object)comNewsRepository.findAll();
+						break;
+					case "industry":
+						obj = (Object)indNewsRepository.findAll();
+						break;
+					case "staff":
+						obj = (Object)staffNewsRepository.findAll();
+						break;
+				}
+				break;
+			case "cases":
+				switch(type2){
+					case "office":
+						obj = officeCaseRepository.findAll();
+						break;
+					case "commercial":
+						obj = commCaseRepository.findAll();
+						break;
+					case "restaurant":
+						obj = restCaseRepository.findAll();
+						break;
+					case "hotel":
+						obj = hotelCaseRepository.findAll();
+						break;
+					case "education":
+						obj = eduCaseRepository.findAll();
+						break;
+				}
+				break;
+			case "join":
+				switch(type2){
+					case "p_train":
+						obj = pTrainRepository.findAll();
+						break;
+				}
+				break;
+		}
+		return obj;
+	}
+
+	public void delResult(String type1, String type2, String title){
+		switch(type1){
+			case "news":
+				switch(type2){
+					case "company":
+						newsDao.delTitle(title, "company_news");
+						break;
+					case "industry":
+						newsDao.delTitle(title, "industry_news");
+						break;
+					case "staff":
+						newsDao.delTitle(title, "staff_news");
+						break;
+				}
+				break;
+			case "cases":
+				switch(type2){
+					case "office":
+						caseDao.delTitle(title, "office_cases");
+						break;
+					case "commercial":
+						caseDao.delTitle(title, "commercial_cases");
+						break;
+					case "hotel":
+						caseDao.delTitle(title, "hotel_cases");
+						break;
+					case "restaurant":
+						caseDao.delTitle(title, "restaurant_cases");
+						break;
+					case "education":
+						caseDao.delTitle(title, "education_cases");
+						break;
+				}
+				break;
+			case "join":
+				switch (type2){
+					case "p_train":
+						pTrainDao.delTitle(title, "personal_train");
+						break;
+				}
+				break;
 		}
 	}
 }

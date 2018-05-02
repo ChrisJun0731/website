@@ -21,4 +21,9 @@ public class PTrainDao {
 		Update update = new Update().addToSet("content.picPaths", picPath);
 		mongoTemplate.updateFirst(query, update, collName);
 	}
+
+	public void delTitle(String title, String collName){
+		Query query = Query.query(Criteria.where("title").is(title));
+		mongoTemplate.remove(query, collName);
+	}
 }

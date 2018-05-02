@@ -43,4 +43,8 @@ public class JoinService {
 		List<Recruit> recruits = recruit_page.getContent();
 		return recruits;
 	}
+
+	public void insertRecruit(List<Recruit> recruits){
+		recruitRepository.insert(recruits);
+	}
 }

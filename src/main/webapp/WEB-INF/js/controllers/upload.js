@@ -5,8 +5,14 @@ define(['../services/uploadService.js'], function(){
             $scope.uploader.uploadAll();
         };
         $scope.uploader.onBeforeUploadItem = function(item){
-            console.log("type is" + $scope.type + ",title is " + $scope.title + ",desc is " + $scope.desc);
             item.url = 'upload?type1='+$scope.type1+"&type2="+$scope.type2+"&title="+$scope.title+"&desc="+$scope.desc;
+        };
+
+        $scope.uploadItem = function(item){
+            item.onBeforeUpload = function(){
+                this.url = 'upload?type1='+$scope.type1+"&type2="+$scope.type2+"&title="+$scope.title+"&desc="+$scope.desc;
+            };
+            item.upload();
         };
 
         $scope.changeType2 = function(type1){
@@ -27,13 +33,30 @@ define(['../services/uploadService.js'], function(){
                         {'name':'酒店会所', 'val':'hotel'},
                         {'name':'教育机构', 'val':'education'}
                     ];
+                    $scope.type2 = 'office';
+                    break;
                 case 'join':
                     $scope.typeNames = [
                         {'name':'人才培养', 'val':'p_train'}
                     ];
+                    $scope.type2 = 'p_train';
+                    break;
             }
-        }
+        };
 
+        $scope.type1 = 'news';
+        $scope.changeType2($scope.type1);
+
+        $scope.queryResults = function(){
+            var config = {params: {type1: $scope.type1, type2: $scope.type2}}
+            uploadService.queryResults(config).then(function(data){
+                $scope.results = data;
+            });
+        };
+
+        $scope.delResult = function(title){
+            var config = {params: {type1: $scope.type1, type2: $scope.type2, title:title}};
+        }
 
     }];
 });
