@@ -2,31 +2,32 @@
 <html> 
 	<head> 
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" > 
-		<title>Login Box Tutorial</title> 
+		<title>ZHHF后台登录</title>
 		<link rel="stylesheet" type="text/css" href="css/login.css" >
-	<style type="text/css"> 
-<!--
-body {
-	background-color: #ffffff;
-}
--->
-</style></head> 
-	<body> 
-		<div class="ribbon">登录</div>
-		<div class="wrapper"> 
-			<div class="logo"></div>
-			<form action="./login" method="post">
-				<div class="loginwrapper">
-					<span class="usertext">用户名:</span><br>
-					<input class="textbox" name="username" type="text" size="25"><br>
-					<span class="usertext">密码:</span><br>
-					<input class="textbox" name="pwd" type="password" size="25">
-					<img src="images/login/lock.png" alt="Lock Image"><br>
-				</div>
-				<div class="bottomwrapper">
-					<input type="submit" class="button" value="">
-				</div>
-			</form>
-		</div> 
+		<style type="text/css">
+		body {
+			background-color: #ffffff;
+		}
+		</style>
+	</head>
+	<body>
+		<div class="wrapper">
+			<div class="ribbon">登录</div>
+			<div>
+				<div class="logo"></div>
+				<form action="./login" method="post">
+					<div class="loginwrapper">
+						<span class="usertext">用户名:</span><br>
+						<input class="textbox" name="username" type="text" size="25"><br>
+						<span class="usertext">密码:</span><br>
+						<input class="textbox" name="pwd" type="password" size="25">
+						<img src="images/login/lock.png" alt="Lock Image"><br>
+					</div>
+					<div class="bottomwrapper">
+						<input type="submit" class="button" value="">
+					</div>
+				</form>
+			</div>
+		</div>
 	</body> 
 </html>

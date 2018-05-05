@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -44,7 +46,18 @@ public class JoinService {
 		return recruits;
 	}
 
-	public void insertRecruit(List<Recruit> recruits){
-		recruitRepository.insert(recruits);
+	public void saveRecruits(List<Recruit> recruits){
+		Date date = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String dateStr = dateFormat.format(date);
+		for(Recruit recruit: recruits){
+			recruit.setDate(dateStr);
+		}
+		recruitRepository.deleteAll();
+		recruitRepository.save(recruits);
+	}
+
+	public List<Recruit> loadRecruits(){
+		return recruitRepository.findAll();
 	}
 }

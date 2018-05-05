@@ -5,7 +5,8 @@
 	<title>Management</title>
 	<script data-main="js/main.js" src="js/plugins/require.js"></script>
 	<link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
-	<link href="css/upload.css" rel="stylesheet" type="text/css"/>
+	<link href="css/bulletin.css" rel="stylesheet" type="text/css"/>
+	<link href="css/angular-toastr.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <nav class="navbar navbar-default" role="navigation">
@@ -14,9 +15,18 @@
 			<a class="navbar-brand" href="#">ZHHF管理后台</a>
 		</div>
 		<div>
-			<ul class="nav navbar-nav">
-				<li class="active"><a ui-sref="message">新闻、案例发布</a></li>
-				<li><a ui-sref="recruit">招聘信息发布</a></li>
+			<ul class="nav navbar-nav" ng-init="activeInd=1">
+				<li uib-dropdown ng-class="{active: activeInd==1}" ng-click="activeInd=1">
+					<a id="bulletin" uib-dropdown-toggle>公告管理</a>
+					<ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="bulletin">
+						<li><a ui-sref="bulletin.create">新增公告</a></li>
+						<li><a ui-sref="bulletin.delete">删除公告</a></li>
+					</ul>
+
+				</li>
+				<li ng-class="{active: activeInd==2}" ng-click="activeInd=2">
+					<a ui-sref="recruit">招聘管理</a>
+				</li>
 			</ul>
 		</div>
 	</div>

@@ -1,0 +1,22 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+
+			<h3>公告-主类别</h3>
+			<select ng-model="type1">
+				<option value="news" selected ng-click="changeType2('news')">新闻</option>
+				<option value="cases" ng-click="changeType2('cases')">案例</option>
+				<option value="join" ng-click="changeType2('join')">加入我们</option>
+			</select>
+
+			<h3>公告-副类别</h3>
+			<select ng-model="type2" ng-options="typeName.val as typeName.name for typeName in typeNames"></select>
+		</div>
+
+
+
+		<div class="col-md-9">
+			<div ui-view></div>
+		</div>
+	</div>
+</div>

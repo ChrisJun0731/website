@@ -3,9 +3,18 @@ define(['app'], function(app){
         var recruitService = {
 
             upload: function(recruits){
-                $http.post('join/recruit', recruits);
-            }
+                var promise = $http.post('join/recruit', recruits).then(function(response){
+                    return response.data;
+                });
+                return promise;
+            },
 
+            load: function(){
+                var promise = $http.get('join/recruit').then(function(rs){
+                    return rs.data;
+                });
+                return promise;
+            }
         };
 
         return recruitService;

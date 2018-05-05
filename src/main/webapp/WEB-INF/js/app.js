@@ -1,17 +1,28 @@
-define(['angular','angularAMD', 'angular-ui-router', 'angular-file-upload'], function(angular, angularAMD){
-    var app = angular.module('app', ['ui.router', 'angularFileUpload']);
+define(['angular','angularAMD', 'angular-ui-router', 'angular-file-upload', 'ui-bootstrap', 'angular-toastr'],
+    function(angular, angularAMD){
+    var app = angular.module('app', ['ui.router', 'angularFileUpload', 'ui.bootstrap', 'toastr']);
     app.config(function($stateProvider, $urlRouterProvider){
-        $urlRouterProvider.otherwise('/message');
+        $urlRouterProvider.otherwise('/bulletin/create');
         $stateProvider
-            .state('message', {
-                url: '/message',
+            .state('bulletin', {
+                url: '/bulletin',
                 views: {
                     'container@': angularAMD.route({
-                        templateUrl: 'templates/upload.html',
-                        controllerUrl: 'js/controllers/upload.js'
+                        templateUrl: 'templates/bulletin.html',
+                        controllerUrl: 'js/controllers/bulletin.js'
                     })
                 }
             })
+            .state('bulletin.create', angularAMD.route({
+                url: '/create',
+                templateUrl: 'templates/bulletin_create.html',
+                controllerUrl: 'js/controllers/bulletin_create.js'
+            }))
+            .state('bulletin.delete', angularAMD.route({
+                url: '/delete',
+                templateUrl: 'templates/bulletin_delete.html',
+                controllerUrl: 'js/controllers/bulletin_delete.js'
+            }))
             .state("recruit", {
                 url: '/recruit',
                 views: {

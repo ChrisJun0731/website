@@ -31,8 +31,9 @@ public class ManagerController {
 		}
 	}
 
+	@ResponseBody
 	@RequestMapping(value="/upload", method = RequestMethod.POST)
-	public void upload(@RequestParam("file")MultipartFile file, @RequestParam("type1")String type1,
+	public String upload(@RequestParam("file")MultipartFile file, @RequestParam("type1")String type1,
 					   @RequestParam("type2")String type2, @RequestParam("title")String title,
 					   @RequestParam("desc")String desc){
 
@@ -46,6 +47,15 @@ public class ManagerController {
 		//数据入库
 		managerService.save(type1, type2, title, desc, picPath);
 		System.out.println("数据保存完毕");
+		return "{\"flag\":\"success\"}";
+	}
+
+	@ResponseBody
+	@RequestMapping(value="/upload_no_file")
+	public String uploadWithNoFile(String type1, String type2, String title, String desc){
+		String picPath = null;
+		managerService.save(type1, type2, title, desc, picPath);
+		return "{\"flag\":\"success\"}";
 	}
 
 	@ResponseBody

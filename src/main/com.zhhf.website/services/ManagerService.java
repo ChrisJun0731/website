@@ -72,7 +72,7 @@ public class ManagerService {
 	 */
 	public String uploadFile(MultipartFile file, String type1, String type2, String title) {
 		//获取root路径
-		String root = System.getenv("CATALINA_HOME") + "/webapps";
+		String root = System.getenv("MY_CATALINA_HOME") + "/webapps";
 		String path = "/website/upload/" + type1 + "/" + type2 + "/" + title + "/";
 		String fileName = file.getOriginalFilename();
 		File uploadDir = new File(root + path);
@@ -111,15 +111,17 @@ public class ManagerService {
 					case "company":
 						//判断该新闻标题是否存在，不存在新增，存在则添加图片的路径
 						CompanyNews comNews = comNewsRepository.findByTitle(title);
-						if (comNews != null && picPath!=null) {
+						if (comNews != null && null != picPath) {
 							newsDao.addPicPaths(title, picPath, "company_news");
 						} else {
 							comNews = new CompanyNews();
 							comNews.setTitle(title);
 							comNews.setDate(dateStr);
 							comNews.getContent().setText(desc);
-							comNews.getContent().getPicPaths().add(picPath);
-							comNewsRepository.insert(comNews);
+							if(picPath != null){
+								comNews.getContent().getPicPaths().add(picPath);
+							}
+							comNewsRepository.save(comNews);
 						}
 						break;
 					case "industry":
@@ -131,8 +133,10 @@ public class ManagerService {
 							indusNews.setTitle(title);
 							indusNews.setDate(dateStr);
 							indusNews.getContent().setText(desc);
-							indusNews.getContent().getPicPaths().add(picPath);
-							indNewsRepository.insert(indusNews);
+							if(picPath != null){
+								indusNews.getContent().getPicPaths().add(picPath);
+							}
+							indNewsRepository.save(indusNews);
 						}
 						break;
 					case "staff":
@@ -144,8 +148,10 @@ public class ManagerService {
 							staffNews.setTitle(title);
 							staffNews.setDate(dateStr);
 							staffNews.getContent().setText(desc);
-							staffNews.getContent().getPicPaths().add(picPath);
-							staffNewsRepository.insert(staffNews);
+							if(picPath != null){
+								staffNews.getContent().getPicPaths().add(picPath);
+							}
+							staffNewsRepository.save(staffNews);
 						}
 						break;
 				}
@@ -162,8 +168,10 @@ public class ManagerService {
 							officeCase.setTitle(title);
 							officeCase.setCoverPath(picPath);
 							officeCase.getContent().setText(desc);
-							officeCase.getContent().getPicPaths().add(picPath);
-							officeCaseRepository.insert(officeCase);
+							if(picPath != null){
+								officeCase.getContent().getPicPaths().add(picPath);
+							}
+							officeCaseRepository.save(officeCase);
 						}
 						break;
 					case "commercial":
@@ -176,8 +184,10 @@ public class ManagerService {
 							commCase.setTitle(title);
 							commCase.setCoverPath(picPath);
 							commCase.getContent().setText(desc);
-							commCase.getContent().getPicPaths().add(picPath);
-							commCaseRepository.insert(commCase);
+							if(picPath != null){
+								commCase.getContent().getPicPaths().add(picPath);
+							}
+							commCaseRepository.save(commCase);
 						}
 						break;
 					case "hotel":
@@ -190,8 +200,10 @@ public class ManagerService {
 							hotelCase.setCoverPath(picPath);
 							hotelCase.setTitle(title);
 							hotelCase.getContent().setText(desc);
-							hotelCase.getContent().getPicPaths().add(picPath);
-							hotelCaseRepository.insert(hotelCase);
+							if(picPath != null){
+								hotelCase.getContent().getPicPaths().add(picPath);
+							}
+							hotelCaseRepository.save(hotelCase);
 						}
 						break;
 					case "restaurant":
@@ -204,8 +216,10 @@ public class ManagerService {
 							restCase.setCoverPath(picPath);
 							restCase.setTitle(title);
 							restCase.getContent().setText(desc);
-							restCase.getContent().getPicPaths().add(picPath);
-							restCaseRepository.insert(restCase);
+							if(picPath != null){
+								restCase.getContent().getPicPaths().add(picPath);
+							}
+							restCaseRepository.save(restCase);
 						}
 						break;
 					case "education":
@@ -218,8 +232,10 @@ public class ManagerService {
 							eduCase.setCoverPath(picPath);
 							eduCase.setTitle(title);
 							eduCase.getContent().setText(desc);
-							eduCase.getContent().getPicPaths().add(picPath);
-							eduCaseRepository.insert(eduCase);
+							if(picPath != null){
+								eduCase.getContent().getPicPaths().add(picPath);
+							}
+							eduCaseRepository.save(eduCase);
 						}
 						break;
 				}
@@ -235,8 +251,10 @@ public class ManagerService {
 							pTrain.setTitle(title);
 							pTrain.setDate(dateStr);
 							pTrain.getContent().setText(desc);
-							pTrain.getContent().getPicPaths().add(picPath);
-							pTrainRepository.insert(pTrain);
+							if(picPath != null){
+								pTrain.getContent().getPicPaths().add(picPath);
+							}
+							pTrainRepository.save(pTrain);
 						}
 
 				}

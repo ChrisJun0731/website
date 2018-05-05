@@ -39,8 +39,16 @@ public class JoinController {
 		return joinService.query_recruit_page(page, pageSize);
 	}
 
+	@ResponseBody
 	@RequestMapping(value="/join/recruit", method=RequestMethod.POST)
-	public void uploadRecruits(@RequestBody List<Recruit> recruits){
-		joinService.insertRecruit(recruits);
+	public String uploadRecruits(@RequestBody List<Recruit> recruits){
+		joinService.saveRecruits(recruits);
+		return "{\"flag\":\"success\"}";
+	}
+
+	@ResponseBody
+	@RequestMapping(value="/join/recruit", method=RequestMethod.GET)
+	public List<Recruit> loadRecruits(){
+		return joinService.loadRecruits();
 	}
 }
