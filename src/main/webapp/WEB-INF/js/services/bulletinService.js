@@ -13,8 +13,8 @@ define(['app'], function(app){
                 return promise;
             },
 
-            addBulletin: function(config){
-                var promise = $http.get('upload_no_file', config).then(function(response){
+            addBulletin: function(data){
+                var promise = $http.post('upload_no_file', data).then(function(response){
                     return response.data;
                 });
                 return promise;

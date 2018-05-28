@@ -1,6 +1,10 @@
 package controllers;
 
+import jo.ContentParam;
 import mongo.entity.user.User;
+import org.apache.commons.codec.Encoder;
+import org.apache.commons.codec.EncoderException;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -33,11 +37,13 @@ public class ManagerController {
 
 	@ResponseBody
 	@RequestMapping(value="/upload", method = RequestMethod.POST)
-	public String upload(@RequestParam("file")MultipartFile file, @RequestParam("type1")String type1,
-					   @RequestParam("type2")String type2, @RequestParam("title")String title,
-					   @RequestParam("desc")String desc){
+	public String upload(@RequestParam("file")MultipartFile file, ContentParam param){
 
 		String picPath = null;
+		String type1 = param.getType1();
+		String type2 = param.getType2();
+		String title = param.getTitle();
+		String desc = param.getDesc();
 		if(file != null){
 			//上传文件
 			picPath = managerService.uploadFile(file, type1, type2, title);
@@ -51,9 +57,13 @@ public class ManagerController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value="/upload_no_file")
-	public String uploadWithNoFile(String type1, String type2, String title, String desc){
+	@RequestMapping(value="/upload_no_file", method=RequestMethod.POST)
+	public String uploadWithNoFile(@RequestBody ContentParam param){
 		String picPath = null;
+		String type1 = param.getType1();
+		String type2 = param.getType2();
+		String title = param.getTitle();
+		String desc = param.getDesc();
 		managerService.save(type1, type2, title, desc, picPath);
 		return "{\"flag\":\"success\"}";
 	}
@@ -78,6 +88,9 @@ public class ManagerController {
 
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(User user, HttpSession session){
+		String key = user.getPwd();
+		String val = DigestUtils.md5Hex(key);
+		user.setPwd(val);
 		if(loginService.isUserExist(user)){
 			session.setAttribute("user", user);
 			return "management";

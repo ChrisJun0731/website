@@ -6,7 +6,8 @@ package jo;
 public class ContentParam {
 	private String title;
 	private String desc;
-	private String type;
+	private String type1;
+	private String type2;
 
 	public String getTitle() {
 		return title;
@@ -24,11 +25,19 @@ public class ContentParam {
 		this.desc = desc;
 	}
 
-	public String getType() {
-		return type;
+	public String getType1() {
+		return type1;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setType1(String type1) {
+		this.type1 = type1;
+	}
+
+	public String getType2() {
+		return type2;
+	}
+
+	public void setType2(String type2) {
+		this.type2 = type2;
 	}
 }

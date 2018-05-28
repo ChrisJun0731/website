@@ -20,7 +20,7 @@ public class EmailService {
 	private static final String SMTPSERVER = "smtp.qq.com";
 	public static final String SMTPPORT = "465";
 	public static final String ACCOUNT = "2623782110@qq.com";
-	public static final String RECEIVER = "1193030047@qq.com";
+	public static final String RECEIVER = "ZHHF0301@163.com";
 	public static final String PWD = "mxowzybqospaecbd";
 
 

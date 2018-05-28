@@ -2,6 +2,7 @@ define(['../services/bulletinService.js'], function(){
     return['$scope', '$timeout', 'BulletinService', 'FileUploader', 'toastr', function($scope, $timeout, bulletinService, FileUploader, toastr){
 
         $scope.uploader = new FileUploader({});
+        $scope.desc = '';
 
         $scope.uploadAll = function(){
 
@@ -15,8 +16,8 @@ define(['../services/bulletinService.js'], function(){
                     toastr.success('上传成功！');
                 },2000);
             }else{
-                var config = {params: {type1: $scope.$parent.type1, type2: $scope.$parent.type2, title: $scope.title, desc: $scope.desc}};
-                bulletinService.addBulletin(config).then(function(rs){
+                var data = {type1: $scope.$parent.type1, type2: $scope.$parent.type2, title: $scope.title, desc: $scope.desc};
+                bulletinService.addBulletin(data).then(function(rs){
                     if(rs.flag=="success"){
                         toastr.success('上传成功！');
                     }else{
@@ -26,13 +27,18 @@ define(['../services/bulletinService.js'], function(){
             }
         };
         $scope.uploader.onBeforeUploadItem = function(item){
-            item.url = 'upload?type1='+$scope.$parent.type1+"&type2="+$scope.$parent.type2+"&title="+$scope.title+"&desc="+$scope.desc;
+//            item.url = 'upload?type1='+$scope.$parent.type1+"&type2="+$scope.$parent.type2+"&title="+$scope.title+"&desc="+$scope.desc;
+            item.url = 'upload';
+            item.formData = [{type1: $scope.$parent.type1, type2: $scope.$parent.type2, title: $scope.title, desc: $scope.desc}];
         };
 
         $scope.uploadItem = function(item){
             $scope.isUndefined();
             item.onBeforeUpload = function(){
-                this.url = 'upload?type1='+$scope.$parent.type1+"&type2="+$scope.$parent.type2+"&title="+$scope.title+"&desc="+$scope.desc;
+//                this.url = 'upload?type1='+$scope.$parent.type1+"&type2="+$scope.$parent.type2+"&title="+$scope.title+"&desc="+$scope.desc;
+                this.url = 'upload';
+                item.formData = [{type1: $scope.$parent.type1, type2: $scope.$parent.type2, title: $scope.title, desc: $scope.desc}];
+
             };
             item.upload();
             toastr.success('上传成功！');
